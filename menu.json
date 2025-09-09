@@ -1,0 +1,30 @@
+{
+  "name": "Restaurang Söder",
+  "description": "Klassisk mat, öppet för lunch och middag.",
+  "phone": "+46 8 123 45 67",
+  "address": "Storgatan 2, Stockholm",
+  "hours": [
+    {"day":"Måndag","open":"11:00","close":"20:00"},
+    {"day":"Tisdag","open":"11:00","close":"20:00"},
+    {"day":"Onsdag","open":"11:00","close":"20:00"},
+    {"day":"Torsdag","open":"11:00","close":"22:00"},
+    {"day":"Fredag","open":"11:00","close":"23:00"},
+    {"day":"Lördag","open":"12:00","close":"23:00"},
+    {"day":"Söndag","open":"12:00","close":"18:00"}
+  ],
+  "menu": [
+    {
+      "category": "Förrätter",
+      "items": [
+        {"name":"Soppa Dagens","desc":"Serveras med bröd","price":"95 kr"}
+      ]
+    },
+    {
+      "category":"Huvudrätter",
+      "items":[
+        {"name":"Klassisk köttgryta","desc":"Med potatispuré","price":"165 kr"},
+        {"name":"Vegetarisk pasta","desc":"Se säsongens grönsaker","price":"155 kr"}
+      ]
+    }
+  ]
+}
