@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Restaurang — Meny & Öppettider</title>
+  <style>
+    /* Simple responsive minimal design */
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{margin:0;padding:18px;color:#222;background:#f7f7f7}
+    header{max-width:900px;margin:0 auto 18px}
+    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    h1{margin:0 0 6px;font-size:1.5rem}
+    .subtitle{color:#666;margin:0 0 12px;font-size:0.95rem}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:720px){.grid{grid-template-columns:1fr 320px}}
+    .menu-section{margin-bottom:8px}
+    .item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}
+    .item:last-child{border-bottom:none}
+    .price{white-space:nowrap;font-weight:600}
+    footer{max-width:900px;margin:16px auto;color:#666;font-size:0.9rem}
+    .hours{font-size:0.95rem}
+  </style>
+</head>
+<body>
+<header class="card">
+  <h1 id="restaurant-name">Restaurang Namn</h1>
+  <p class="subtitle" id="restaurant-desc">Välkommen — dagens meny och öppettider.</p>
+</header>
+
+<main class="grid" id="main">
+  <section class="card" id="menu">
+    <h2>Meny</h2>
+    <div id="menu-content">Laddar meny…</div>
+  </section>
+
+  <aside class="card" id="info">
+    <h3>Öppettider</h3>
+    <div id="hours" class="hours">Laddar öppettider…</div>
+
+    <h3 style="margin-top:12px">Kontakt</h3>
+    <div id="contact">Telefon: <a id="phone" href="#">012-345 678</a><br>Adress: <span id="address">Gatan 1, Stad</span></div>
+  </aside>
+</main>
+
+<footer>
+  <small>Uppdatera menyn genom att ändra <code>menu.json</code> i repo:t eller via GitHub web-editor.</small>
+</footer>
+
+<script>
+/*
+ This simple script loads menu.json from the same folder and renders it.
+ When you deploy to GitHub Pages or Netlify, menu.json should be in the site root.
+*/
+async function loadSite() {
+  try {
+    const res = await fetch('menu.json', {cache: "no-store"});
+    if(!res.ok) throw new Error('Could not load menu.json');
+    const data = await res.json();
+
+    document.getElementById('restaurant-name').textContent = data.name || 'Restaurang Namn';
+    document.getElementById('restaurant-desc').textContent = data.description || '';
+    document.getElementById('phone').textContent = data.phone || '';
+    if(data.phone) document.getElementById('phone').href = 'tel:' + data.phone.replace(/\s+/g,'');
+    document.getElementById('address').textContent = data.address || '';
+
+    const menuContent = document.getElementById('menu-content');
+    menuContent.innerHTML = '';
+    (data.menu || []).forEach(section => {
+      const sec = document.createElement('div');
+      sec.className = 'menu-section';
+      const title = document.createElement('h4');
+      title.textContent = section.category;
+      sec.appendChild(title);
+      section.items.forEach(it => {
+        const el = document.createElement('div');
+        el.className = 'item';
+        el.innerHTML = `<div><strong>${it.name}</strong><div style="color:#666;font-size:.95rem">${it.desc || ''}</div></div><div class="price">${it.price}</div>`;
+        sec.appendChild(el);
+      });
+      menuContent.appendChild(sec);
+    });
+
+    // hours
+    const hoursEl = document.getElementById('hours');
+    hoursEl.innerHTML = '';
+    (data.hours || []).forEach(h=>{
+      const row = document.createElement('div');
+      row.textContent = `${h.day}: ${h.open} — ${h.close}`;
+      hoursEl.appendChild(row);
+    });
+
+  } catch(err) {
+    console.error(err);
+    document.getElementById('menu-content').textContent = 'Kunde inte ladda menyn.';
+  }
+}
+
+loadSite();
+</script>
+</body>
+</html>
