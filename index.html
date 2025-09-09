@@ -4,9 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Restaurang Namn</title>
+
+  <!-- Google Fonts: Cinzel Decorative & Noto Serif SC -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+
   <style>
-    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; scroll-behavior: smooth; }
-    body { margin:0; padding:0; background:#f7f7f7; color:#222; }
+    :root { 
+      font-family: 'Noto Serif SC', 'Cinzel Decorative', serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; 
+      scroll-behavior: smooth; 
+      --gold: #E2B857;
+    }
+
+    body { margin:0; padding:0; background:#000; color:#fff; }
 
     /* Hero section */
     .hero {
@@ -14,44 +23,66 @@
       height: 100vh;
       overflow: hidden;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: center; /* center everything vertically */
       align-items: center;
+      text-align:center;
+      font-family: 'Scheherazade New', serif;
+      padding: 0 20px;
     }
     .hero video {
       position: absolute;
-      top: 50%; left: 50%;
-      min-width: 100%; min-height: 100%;
-      width: auto; height: auto;
-      z-index: -1;
-      transform: translate(-50%, -50%);
+      top:0; left:0; width:100%; height:100%;
       object-fit: cover;
-      filter: brightness(0.6); /* darken video for contrast */
+      z-index: -2;
+      filter: brightness(0.4);
     }
     .hero .overlay {
       position: absolute;
       top:0; left:0; width:100%; height:100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: -1;
     }
+
+    .hero .logo {
+      max-width:250px;
+      margin-bottom:20px;
+      filter: drop-shadow(0 0 16px var(--gold));
+    }
+
+    .hero .welcome-text {
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin-bottom: 30px;
+      z-index: 1;
+      font-family: 'Cinzel Decorative', serif;
+      letter-spacing: 1px;
+      line-height: 1.5;
+    }
+
     .hero .buttons {
       position: relative;
       z-index: 1;
       display: flex;
+      flex-direction: column;
       gap: 16px;
     }
     .hero button {
-      background: #000;
-      color: #fff;
-      padding: 14px 28px;
+      background: transparent;
+      color: var(--gold);
+      padding: 12px 28px;
       font-size: 1.1rem;
-      border: 2px solid #fff;
+      border: 2px solid var(--gold);
       border-radius: 8px;
       cursor: pointer;
       transition: all .2s ease;
+      width:200px;
+      margin:0 auto;
+      font-family: 'Cinzel Decorative', serif;
     }
     .hero button:hover {
-      background:#fff;
-      color:#000;
+      background: var(--gold);
+      color: #000;
     }
 
     /* Sections */
@@ -59,17 +90,87 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 60px 20px;
+      background:#000;
+      color:#fff;
+      font-family: 'Scheherazade New', serif;
     }
-    h2 { margin-top:0; font-size:1.8rem; }
+    section h2 { 
+      margin-top:0; 
+      font-size:2rem; 
+      color:var(--gold); 
+      font-family: 'Cinzel Decorative', serif; 
+    }
 
     .menu-section { margin-bottom:24px; }
-    .item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ddd; }
+    .item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #666; }
     .item:last-child { border-bottom:none; }
     .price { white-space:nowrap; font-weight:600; }
 
+    /* Footer */
     footer {
-      background:#111; color:#eee; padding:20px; text-align:center;
+      background:#000; color:#fff; padding:20px; text-align:center;
       font-size:0.9rem;
+      font-family: 'Cinzel Decorative', serif;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Image slider */
+    #menu-images {
+      text-align:center; 
+      padding: 20px 20px 0 20px;
+    }
+    #image-slider {
+      position:relative; 
+      display:inline-block;
+    }
+    #slider-img {
+      max-width:400px; 
+      width:100%; 
+      margin:10px; 
+      border-radius:12px; 
+      box-shadow:0 4px 24px rgba(0,0,0,0.3);
+    }
+    #next-img {
+      position:absolute; 
+      right:-50px; 
+      top:50%; 
+      transform:translateY(-50%); 
+      background:var(--gold); 
+      color:#000; 
+      border:none; 
+      border-radius:50%; 
+      width:40px; 
+      height:40px; 
+      font-size:1.5rem; 
+      cursor:pointer; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Parallax Banner */
+    .parallax-banner {
+      width: 100vw;
+      min-height: 420px; /* Increased thickness */
+      background-image: url('parrallax.jpg');
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin: 0;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.3);
+      filter: blur(6px);
+      will-change: background-position;
+      transition: background-position 1.5s cubic-bezier(.25,.1,.25,1);
+    }
+
+    /* Center sections */
+    #hours, #contact {
+      text-align: center;
+    }
+    #hours-content, #contact > p {
+      display: inline-block;
+      text-align: center;
     }
   </style>
 </head>
@@ -78,10 +179,21 @@
 <!-- Hero -->
 <header class="hero">
   <video autoplay muted loop playsinline>
-    <!-- Replace with your own video file or YouTube embed -->
     <source src="kroran_video.mp4" type="video/mp4">
+    Din webbläsare stöder inte videon.
   </video>
   <div class="overlay"></div>
+
+  <!-- Logo on top -->
+  <img src="logo.png" alt="Restaurang Logo" class="logo">
+
+  <!-- Welcome text -->
+  <div class="welcome-text">
+    Välkommen hem till oss<br>
+    för att testa autentisk Uigurisk mat
+  </div>
+
+  <!-- Buttons -->
   <div class="buttons">
     <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});">Se meny</button>
     <button onclick="document.getElementById('hours').scrollIntoView({behavior:'smooth'});">Öppettider</button>
@@ -90,19 +202,34 @@
 </header>
 
 <!-- Menu -->
-<section id="menu">
-  <h2>Meny</h2>
-  <div id="menu-content">Laddar meny…</div>
+<section id="menu" style="text-align:center;">
+  <h2 style="font-size:2.8rem; margin-bottom:10px;">Meny</h2>
+  <div id="menu-content" style="display:inline-block; text-align:center;">Laddar meny…</div>
 </section>
 
+<section id="menu-images" style="text-align:center; padding: 8px 20px 0 20px;">
+  <div id="image-slider" style="position:relative; display:inline-block;">
+    <button id="prev-img" style="position:absolute; left:-50px; top:50%; transform:translateY(-50%); background:var(--gold); color:#000; border:none; border-radius:50%; width:40px; height:40px; font-size:1.5rem; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.2); display:none;">
+      &larr;
+    </button>
+    <img id="slider-img" src="bild1.jpg" alt="Bild 1" style="max-width:540px; width:100%; margin:6px; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.3); cursor:pointer;">
+    <button id="next-img" style="position:absolute; right:-50px; top:50%; transform:translateY(-50%); background:var(--gold); color:#000; border:none; border-radius:50%; width:40px; height:40px; font-size:1.5rem; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+      &rarr;
+    </button>
+  </div>
+</section>
+
+<!-- Parallax Banner -->
+<div class="parallax-banner"></div>
+
 <!-- Hours -->
-<section id="hours">
+<section id="hours" style="text-align:center;">
   <h2>Öppettider</h2>
-  <div id="hours-content">Laddar öppettider…</div>
+  <div id="hours-content" style="display:inline-block; text-align:center;">Laddar öppettider…</div>
 </section>
 
 <!-- Contact -->
-<section id="contact">
+<section id="contact" style="text-align:center;">
   <h2>Kontakt</h2>
   <p>Telefon: <a id="phone" href="#">012-345 678</a></p>
   <p>Adress: <span id="address">Gatan 1, Stad</span></p>
@@ -137,7 +264,7 @@ async function loadSite() {
       sec.className = 'menu-section';
       sec.innerHTML = `<h3>${section.category}</h3>`;
       section.items.forEach(it=>{
-        sec.innerHTML += `<div class="item"><div><strong>${it.name}</strong><div style="color:#666;font-size:.95rem">${it.desc||''}</div></div><div class="price">${it.price}</div></div>`;
+        sec.innerHTML += `<div class="item"><div><strong>${it.name}</strong><div style="color:#ccc;font-size:.95rem">${it.desc||''}</div></div><div class="price">${it.price}</div></div>`;
       });
       menuContent.appendChild(sec);
     });
@@ -153,6 +280,70 @@ async function loadSite() {
   }
 }
 loadSite();
+
+// Simple image slider logic
+const images = ["bild1.jpg", "bild2.jpg"];
+let currentImg = 0;
+const sliderImg = document.getElementById("slider-img");
+const nextImgBtn = document.getElementById("next-img");
+const prevImgBtn = document.getElementById("prev-img");
+
+function updateSlider() {
+  sliderImg.src = images[currentImg];
+  sliderImg.alt = "Bild " + (currentImg + 1);
+  prevImgBtn.style.display = currentImg > 0 ? "inline-block" : "none";
+  nextImgBtn.style.display = currentImg < images.length - 1 ? "inline-block" : "none";
+}
+
+nextImgBtn.addEventListener("click", () => {
+  if (currentImg < images.length - 1) {
+    currentImg++;
+    updateSlider();
+  }
+});
+
+prevImgBtn.addEventListener("click", () => {
+  if (currentImg > 0) {
+    currentImg--;
+    updateSlider();
+  }
+});
+
+updateSlider();
+
+// Modal logic for enlarged image
+const imgModal = document.getElementById("img-modal");
+const modalImg = document.getElementById("modal-img");
+const closeModal = document.getElementById("close-modal");
+
+sliderImg.addEventListener("click", () => {
+  modalImg.src = images[currentImg];
+  modalImg.alt = sliderImg.alt;
+  imgModal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+});
+
+closeModal.addEventListener("click", () => {
+  imgModal.style.display = "none";
+  document.body.style.overflow = "";
+});
+
+// Optional: close modal on background click
+imgModal.addEventListener("click", (e) => {
+  if (e.target === imgModal) {
+    imgModal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+});
+
+/* Parallax scroll handler */
+window.addEventListener('scroll', function() {
+  const banner = document.querySelector('.parallax-banner');
+  if (banner) {
+    const scrolled = window.scrollY;
+    banner.style.backgroundPosition = `center ${scrolled * 0.15}px`;
+  }
+});
 </script>
 
 </body>
