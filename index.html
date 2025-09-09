@@ -3,100 +3,157 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Restaurang — Meny & Öppettider</title>
+  <title>Restaurang Namn</title>
   <style>
-    /* Simple responsive minimal design */
-    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{margin:0;padding:18px;color:#222;background:#f7f7f7}
-    header{max-width:900px;margin:0 auto 18px}
-    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-    h1{margin:0 0 6px;font-size:1.5rem}
-    .subtitle{color:#666;margin:0 0 12px;font-size:0.95rem}
-    .grid{display:grid;grid-template-columns:1fr;gap:12px}
-    @media(min-width:720px){.grid{grid-template-columns:1fr 320px}}
-    .menu-section{margin-bottom:8px}
-    .item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}
-    .item:last-child{border-bottom:none}
-    .price{white-space:nowrap;font-weight:600}
-    footer{max-width:900px;margin:16px auto;color:#666;font-size:0.9rem}
-    .hours{font-size:0.95rem}
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; scroll-behavior: smooth; }
+    body { margin:0; padding:0; background:#f7f7f7; color:#222; }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero video {
+      position: absolute;
+      top: 50%; left: 50%;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      filter: brightness(0.6); /* darken video for contrast */
+    }
+    .hero .overlay {
+      position: absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 0;
+    }
+    .hero .buttons {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 16px;
+    }
+    .hero button {
+      background: #000;
+      color: #fff;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .hero button:hover {
+      background:#fff;
+      color:#000;
+    }
+
+    /* Sections */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    h2 { margin-top:0; font-size:1.8rem; }
+
+    .menu-section { margin-bottom:24px; }
+    .item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ddd; }
+    .item:last-child { border-bottom:none; }
+    .price { white-space:nowrap; font-weight:600; }
+
+    footer {
+      background:#111; color:#eee; padding:20px; text-align:center;
+      font-size:0.9rem;
+    }
   </style>
 </head>
 <body>
-<header class="card">
-  <h1 id="restaurant-name">Restaurang Namn</h1>
-  <p class="subtitle" id="restaurant-desc">Välkommen — dagens meny och öppettider.</p>
+
+<!-- Hero -->
+<header class="hero">
+  <video autoplay muted loop playsinline>
+    <!-- Replace with your own video file or YouTube embed -->
+    <source src="kroran_video.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="buttons">
+    <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});">Se meny</button>
+    <button onclick="document.getElementById('hours').scrollIntoView({behavior:'smooth'});">Öppettider</button>
+    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">Kontakt</button>
+  </div>
 </header>
 
-<main class="grid" id="main">
-  <section class="card" id="menu">
-    <h2>Meny</h2>
-    <div id="menu-content">Laddar meny…</div>
-  </section>
+<!-- Menu -->
+<section id="menu">
+  <h2>Meny</h2>
+  <div id="menu-content">Laddar meny…</div>
+</section>
 
-  <aside class="card" id="info">
-    <h3>Öppettider</h3>
-    <div id="hours" class="hours">Laddar öppettider…</div>
+<!-- Hours -->
+<section id="hours">
+  <h2>Öppettider</h2>
+  <div id="hours-content">Laddar öppettider…</div>
+</section>
 
-    <h3 style="margin-top:12px">Kontakt</h3>
-    <div id="contact">Telefon: <a id="phone" href="#">012-345 678</a><br>Adress: <span id="address">Gatan 1, Stad</span></div>
-  </aside>
-</main>
+<!-- Contact -->
+<section id="contact">
+  <h2>Kontakt</h2>
+  <p>Telefon: <a id="phone" href="#">012-345 678</a></p>
+  <p>Adress: <span id="address">Gatan 1, Stad</span></p>
+</section>
 
 <footer>
-  <small>Uppdatera menyn genom att ändra <code>menu.json</code> i repo:t eller via GitHub web-editor.</small>
+  © <span id="year"></span> Restaurang Namn
 </footer>
 
 <script>
-/*
- This simple script loads menu.json from the same folder and renders it.
- When you deploy to GitHub Pages or Netlify, menu.json should be in the site root.
-*/
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// load menu & hours from JSON
 async function loadSite() {
   try {
-    const res = await fetch('menu.json', {cache: "no-store"});
-    if(!res.ok) throw new Error('Could not load menu.json');
+    const res = await fetch('menu.json', {cache:"no-store"});
+    if(!res.ok) throw new Error('menu.json missing');
     const data = await res.json();
 
-    document.getElementById('restaurant-name').textContent = data.name || 'Restaurang Namn';
-    document.getElementById('restaurant-desc').textContent = data.description || '';
-    document.getElementById('phone').textContent = data.phone || '';
-    if(data.phone) document.getElementById('phone').href = 'tel:' + data.phone.replace(/\s+/g,'');
-    document.getElementById('address').textContent = data.address || '';
+    document.title = data.name || "Restaurang Namn";
 
+    // phone + address
+    document.getElementById('phone').textContent = data.phone || "";
+    if(data.phone) document.getElementById('phone').href = "tel:" + data.phone.replace(/\s+/g,'');
+    document.getElementById('address').textContent = data.address || "";
+
+    // menu
     const menuContent = document.getElementById('menu-content');
     menuContent.innerHTML = '';
-    (data.menu || []).forEach(section => {
+    (data.menu||[]).forEach(section=>{
       const sec = document.createElement('div');
       sec.className = 'menu-section';
-      const title = document.createElement('h4');
-      title.textContent = section.category;
-      sec.appendChild(title);
-      section.items.forEach(it => {
-        const el = document.createElement('div');
-        el.className = 'item';
-        el.innerHTML = `<div><strong>${it.name}</strong><div style="color:#666;font-size:.95rem">${it.desc || ''}</div></div><div class="price">${it.price}</div>`;
-        sec.appendChild(el);
+      sec.innerHTML = `<h3>${section.category}</h3>`;
+      section.items.forEach(it=>{
+        sec.innerHTML += `<div class="item"><div><strong>${it.name}</strong><div style="color:#666;font-size:.95rem">${it.desc||''}</div></div><div class="price">${it.price}</div></div>`;
       });
       menuContent.appendChild(sec);
     });
 
     // hours
-    const hoursEl = document.getElementById('hours');
-    hoursEl.innerHTML = '';
-    (data.hours || []).forEach(h=>{
-      const row = document.createElement('div');
-      row.textContent = `${h.day}: ${h.open} — ${h.close}`;
-      hoursEl.appendChild(row);
+    const hoursContent = document.getElementById('hours-content');
+    hoursContent.innerHTML = '';
+    (data.hours||[]).forEach(h=>{
+      hoursContent.innerHTML += `<div>${h.day}: ${h.open} – ${h.close}</div>`;
     });
-
   } catch(err) {
     console.error(err);
-    document.getElementById('menu-content').textContent = 'Kunde inte ladda menyn.';
   }
 }
-
 loadSite();
 </script>
+
 </body>
 </html>
