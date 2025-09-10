@@ -1,15 +1,152 @@
 {
-  "name": "Restaurang Söder",
+  "name": "Restaurang Krorän",
   "description": "Klassisk mat, öppet för lunch och middag.",
-  "phone": "+46 8 123 45 67",
-  "address": "Storgatan 2, Stockholm",
+  "phone": "+46 8-661 54 92",
+  "address": "Furusundsgatan 9, 115 37 Stockholm",
   "hours": [
-    {"day":"Måndag","open":"11:00","close":"20:00"},
-    {"day":"Tisdag","open":"11:00","close":"20:00"},
-    {"day":"Onsdag","open":"11:00","close":"20:00"},
-    {"day":"Torsdag","open":"11:00","close":"22:00"},
-    {"day":"Fredag","open":"11:00","close":"23:00"},
-    {"day":"Lördag","open":"12:00","close":"23:00"},
-    {"day":"Söndag","open":"12:00","close":"18:00"}
+    {"day":"Måndag","open":"Stängt"},
+    {"day":"Tisdag","open":"11:00","close":"21:00"},
+    {"day":"Onsdag","open":"11:00","close":"21:00"},
+    {"day":"Torsdag","open":"11:00","close":"21:00"},
+    {"day":"Fredag","open":"11:00","close":"21:00"},
+    {"day":"Lördag","open":"12:00","close":"21:00"},
+    {"day":"Söndag","open":"12:00","close":"21:00"}
+  ],
+
+  "om":[
+    "Upplev smaker från hjärtat av Centralasien hos oss. Vi serverar autentiska rätter som laghman – handgjorda nudlar med saftig köttfyllning och färska grönsaker – och många andra traditionella rätter från det rika uyguriska köket. Allt kött är halal, och de flesta rätter går att få helt vegetariska utan att kompromissa med smaken. Kom och upptäck en ny värld av aromer och kultur på din tallrik!"
+  ],
+  "menu": [
+    {
+      "category": "Förrätter",
+      "items": [
+        {"name":"Samosa","desc":"Kryddig köttfylld deg","price":"55 kr"},
+        {"name":"Manti","desc":"Uiguriska dumplings med kött","price":"65 kr"}
+      ]
+    },
+    {
+      "category": "Huvudrätter",
+      "items": [
+        {
+          "name": "Shah Laghman",
+          "desc": "Uyghuriska handgjorda nudlar (biff/lamm/veg)",
+          "price": "179 kr"
+        },
+        {
+          "name": "Uyghur Göshnaan",
+          "desc": "Uyghurisk köttpaj fylld med lamm och lök (biff/lamm/veg)",
+          "price": "149 kr"
+        },
+        {
+          "name": "Kroräns Laghman",
+          "desc": "Uyghuriska handgjorda nudlar med köttfärs (biff/lamm/veg)",
+          "price": "165 kr"
+        },
+        {
+          "name": "Uyghur Samsa",
+          "desc": "Bakade degknyte fylld med lamm och lök (biff/lamm/veg)",
+          "price": "129 kr / 4 st"
+        },
+        {
+          "name": "Merwayit Chöp",
+          "desc": "Uyghuriska wokade finskurna nudlar (biff/lamm/kyckling/veg)",
+          "price": "149 kr"
+        },
+        {
+          "name": "Uyghurisk Kebab",
+          "desc": "Uyghurisk grillspett med lamm",
+          "price": "99 kr / 4 st"
+        },
+        {
+          "name": "Qorma Chöp",
+          "desc": "Uyghuriska wokade nudlar (biff/lamm/kyckling/veg)",
+          "price": "149 kr"
+        },
+        {
+          "name": "Chöchüre",
+          "desc": "Uyghurisk wontonsoppa med lamm",
+          "price": "129 kr"
+        },
+        {
+          "name": "Qorma Chöp Stark",
+          "desc": "Uyghuriska wokade nudlar (biff/lamm/kyckling/veg)",
+          "price": "149 kr"
+        },
+        {
+          "name": "Naan Kebab",
+          "desc": "Uyghurisk kebabwok med naanbröd",
+          "price": "198 kr"
+        },
+        {
+          "name": "Pitir Manta",
+          "desc": "Uyghuriska ångkokta dumplings med lamm",
+          "price": "179 kr / 6 st"
+        },
+        {
+          "name": "Kawa Manta",
+          "desc": "Uyghuriska ångkokta dumplings med pumpa",
+          "price": "179 kr / 6 st"
+        },
+        {
+          "name": "Uyghur Polo (Pilaf)",
+          "desc": "Risrätt med lamm och morot",
+          "price": "165 kr"
+        },
+        {
+          "name": "Dapanji Kyckling",
+          "desc": "Stor tallrik kycklinggryta med potatis, breda nudlar, stark",
+          "price": "289 kr / M"
+        },
+        {
+          "name": "Dapanji Kyckling",
+          "desc": "Stor tallrik kycklinggryta med potatis, breda nudlar, stark",
+          "price": "389 kr / L"
+        },
+        {
+          "name": "Seriq-Ash Kebab",
+          "desc": "Kalla gula nudlar med wokade kebabkött, stark",
+          "price": "169 kr"
+        },
+        {
+          "name": "Jiaoma Kyckling",
+          "desc": "Kycklingsallad med chilisås och sichuanpeppar, stark",
+          "price": "168 kr"
+        },
+        {
+          "name": "Laziji Kyckling",
+          "desc": "Wokade kyckling (med ben) med crispy naan bitar, stark",
+          "price": "248 kr"
+        },
+        {
+          "name": "Wokade Komage",
+          "desc": "Wokade komage med chili och sichuanpeppar, stark",
+          "price": "179 kr"
+        },
+        {
+          "name": "Wokade Udonnudlar",
+          "desc": "Wokade udonnudlar i stark bönchilisås",
+          "price": "139 kr"
+        },
+        {
+          "name": "Kroräns Revben",
+          "desc": "Wokade kryddiga lammrevben",
+          "price": "365 kr"
+        }
+      ]
+    },
+    {
+      "category": "Dryck",
+      "items": [
+        {"name":"Chai Te","desc":"Uiguriskt kryddigt te","price":"25 kr"},
+        {"name":"Mineralvatten","desc":"Kolsyrat eller stilla","price":"20 kr"}
+      ]
+    },
+    {
+      "category": "Efterrätter",
+      "items": [
+        {"name":"Baklava","desc":"Söt deg med nötter och honung","price":"45 kr"},
+        {"name":"Fruktfat","desc":"Färska frukter","price":"40 kr"}
+      ]
+    }
   ]
 }

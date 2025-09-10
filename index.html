@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Restaurang Namn</title>
 
-  <!-- Google Fonts: Cinzel Decorative & Noto Serif SC -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
 
   <style>
@@ -24,10 +24,9 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* center everything vertically */
+      justify-content: center;
       align-items: center;
       text-align:center;
-      font-family: 'Scheherazade New', serif;
       padding: 0 20px;
     }
     .hero video {
@@ -43,26 +42,20 @@
       background: rgba(0,0,0,0.3);
       z-index: -1;
     }
-
     .hero .logo {
-      max-width:250px;
-      margin-bottom:20px;
-      filter: drop-shadow(0 0 16px var(--gold));
+      max-width: 480px; /* Reduced from 700px */
+      margin-bottom: 32px;
+      filter: drop-shadow(0 0 24px var(--gold));
     }
-
     .hero .welcome-text {
       font-size: 1.6rem;
       color: var(--gold);
       margin-bottom: 30px;
-      z-index: 1;
       font-family: 'Cinzel Decorative', serif;
       letter-spacing: 1px;
       line-height: 1.5;
     }
-
     .hero .buttons {
-      position: relative;
-      z-index: 1;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -77,7 +70,6 @@
       cursor: pointer;
       transition: all .2s ease;
       width:200px;
-      margin:0 auto;
       font-family: 'Cinzel Decorative', serif;
     }
     .hero button:hover {
@@ -101,14 +93,43 @@
       font-family: 'Cinzel Decorative', serif; 
     }
 
-    .menu-section { margin-bottom:24px; }
-    .item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #666; }
+    /* Menu styles */
+    .menu-section { margin-bottom:40px; }
+    .menu-section h3 { 
+      font-size:1.6rem; 
+      color: var(--gold); 
+      margin-bottom:12px;
+      font-family: 'Cinzel Decorative', serif;
+      border-bottom: 1px solid #555;
+      padding-bottom:4px;
+    }
+    .item { 
+      display:flex; 
+      justify-content:space-between; 
+      padding:6px 0; 
+      border-bottom:1px dotted #444; 
+    }
     .item:last-child { border-bottom:none; }
-    .price { white-space:nowrap; font-weight:600; }
+    .item-desc { 
+      font-size:0.95rem; 
+      color:#ccc; 
+      margin-top:2px; 
+    }
+    .price { 
+      white-space:nowrap; 
+      font-weight:600; 
+      color: var(--gold);
+    }
+    .item > div:first-child {
+      text-align: left; /* Make food name and description left-aligned */
+    }
 
     /* Footer */
     footer {
-      background:#000; color:#fff; padding:20px; text-align:center;
+      background:#000; 
+      color:#fff; 
+      padding:20px; 
+      text-align:center;
       font-size:0.9rem;
       font-family: 'Cinzel Decorative', serif;
     }
@@ -116,61 +137,49 @@
     a { color: var(--gold); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* Image slider */
-    #menu-images {
-      text-align:center; 
-      padding: 20px 20px 0 20px;
-    }
-    #image-slider {
-      position:relative; 
-      display:inline-block;
-    }
-    #slider-img {
-      max-width:400px; 
-      width:100%; 
-      margin:10px; 
-      border-radius:12px; 
-      box-shadow:0 4px 24px rgba(0,0,0,0.3);
-    }
-    #next-img {
-      position:absolute; 
-      right:-50px; 
-      top:50%; 
-      transform:translateY(-50%); 
-      background:var(--gold); 
-      color:#000; 
-      border:none; 
-      border-radius:50%; 
-      width:40px; 
-      height:40px; 
-      font-size:1.5rem; 
-      cursor:pointer; 
-      box-shadow:0 2px 8px rgba(0,0,0,0.2);
-    }
+    #hours, #contact { text-align:center; }
+    #hours-content, #contact > p { display:inline-block; text-align:center; }
 
-    /* Parallax Banner */
+    /* Parallax banner */
     .parallax-banner {
-      width: 100vw;
-      min-height: 420px; /* Increased thickness */
+      width: 100%;
+      height: 320px;
       background-image: url('parrallax.jpg');
       background-attachment: fixed;
-      background-position: center;
+      background-position: center 0;
       background-repeat: no-repeat;
       background-size: cover;
-      margin: 0;
-      box-shadow: 0 6px 32px rgba(0,0,0,0.3);
-      filter: blur(6px);
+      filter: blur(3px);
+      margin: 0 auto 0 auto;
+      position: relative;
       will-change: background-position;
-      transition: background-position 1.5s cubic-bezier(.25,.1,.25,1);
+      transition: background-position 0.2s;
+      overflow: hidden;
     }
-
-    /* Center sections */
-    #hours, #contact {
-      text-align: center;
+    .parallax-banner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      pointer-events: none;
     }
-    #hours-content, #contact > p {
-      display: inline-block;
+    .parallax-banner h2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem;
+      color: var(--gold);
       text-align: center;
+      font-family: 'Cinzel Decorative', serif;
+    }
+    @media (max-width: 900px) {
+      .parallax-banner {
+        background-attachment: scroll;
+      }
     }
   </style>
 </head>
@@ -184,16 +193,13 @@
   </video>
   <div class="overlay"></div>
 
-  <!-- Logo on top -->
-  <img src="logo.png" alt="Restaurang Logo" class="logo">
+  <img src="kroran_cleaned_scaled2x_v2.png" alt="Restaurang Logo" class="logo">
 
-  <!-- Welcome text -->
   <div class="welcome-text">
-    Välkommen hem till oss<br>
-    för att testa autentisk Uigurisk mat
+    Välkommen till Sveriges första Uyghuriska Restaurang<br>
+    för att testa autentisk Uygurisk mat
   </div>
 
-  <!-- Buttons -->
   <div class="buttons">
     <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'});">Se meny</button>
     <button onclick="document.getElementById('hours').scrollIntoView({behavior:'smooth'});">Öppettider</button>
@@ -201,35 +207,36 @@
   </div>
 </header>
 
-<!-- Menu -->
-<section id="menu" style="text-align:center;">
-  <h2 style="font-size:2.8rem; margin-bottom:10px;">Meny</h2>
-  <div id="menu-content" style="display:inline-block; text-align:center;">Laddar meny…</div>
+<!-- Om oss -->
+<section id="om-oss" style="text-align:center;">
+  <h2>Om oss</h2>
+  <div id="om-content" style="display:inline-block; text-align:left; max-width:700px;">
+    Laddar information…
+  </div>
 </section>
 
-<section id="menu-images" style="text-align:center; padding: 8px 20px 0 20px;">
-  <div id="image-slider" style="position:relative; display:inline-block;">
-    <button id="prev-img" style="position:absolute; left:-50px; top:50%; transform:translateY(-50%); background:var(--gold); color:#000; border:none; border-radius:50%; width:40px; height:40px; font-size:1.5rem; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.2); display:none;">
-      &larr;
-    </button>
-    <img id="slider-img" src="bild1.jpg" alt="Bild 1" style="max-width:540px; width:100%; margin:6px; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.3); cursor:pointer;">
-    <button id="next-img" style="position:absolute; right:-50px; top:50%; transform:translateY(-50%); background:var(--gold); color:#000; border:none; border-radius:50%; width:40px; height:40px; font-size:1.5rem; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.2);">
-      &rarr;
-    </button>
+<!-- Menu -->
+<section id="menu" style="text-align:center;">
+  <h2>Meny</h2>
+  <div id="menu-columns" style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+    <div id="menu-left" style="flex:1 1 300px; max-width:340px;"></div>
+    <div id="menu-huvudratter" style="flex:1 1 300px; max-width:340px;"></div>
   </div>
 </section>
 
 <!-- Parallax Banner -->
-<div class="parallax-banner"></div>
+<div class="parallax-banner">
+  <h2></h2>
+</div>
 
 <!-- Hours -->
-<section id="hours" style="text-align:center;">
+<section id="hours">
   <h2>Öppettider</h2>
-  <div id="hours-content" style="display:inline-block; text-align:center;">Laddar öppettider…</div>
+  <div id="hours-content">Laddar öppettider…</div>
 </section>
 
 <!-- Contact -->
-<section id="contact" style="text-align:center;">
+<section id="contact">
   <h2>Kontakt</h2>
   <p>Telefon: <a id="phone" href="#">012-345 678</a></p>
   <p>Adress: <span id="address">Gatan 1, Stad</span></p>
@@ -242,7 +249,7 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// load menu & hours from JSON
+// Load menu & hours from menu.json
 async function loadSite() {
   try {
     const res = await fetch('menu.json', {cache:"no-store"});
@@ -257,93 +264,60 @@ async function loadSite() {
     document.getElementById('address').textContent = data.address || "";
 
     // menu
-    const menuContent = document.getElementById('menu-content');
-    menuContent.innerHTML = '';
-    (data.menu||[]).forEach(section=>{
+    const menuLeft = document.getElementById('menu-left');
+    const menuHuvudratter = document.getElementById('menu-huvudratter');
+    menuLeft.innerHTML = '';
+    menuHuvudratter.innerHTML = '';
+
+    (data.menu || []).forEach(section => {
       const sec = document.createElement('div');
       sec.className = 'menu-section';
       sec.innerHTML = `<h3>${section.category}</h3>`;
-      section.items.forEach(it=>{
-        sec.innerHTML += `<div class="item"><div><strong>${it.name}</strong><div style="color:#ccc;font-size:.95rem">${it.desc||''}</div></div><div class="price">${it.price}</div></div>`;
+      section.items.forEach(it => {
+        sec.innerHTML += `
+          <div class="item">
+            <div>
+              <strong>${it.name}</strong>
+              ${it.desc ? `<div class="item-desc">${it.desc}</div>` : ''}
+            </div>
+            <div class="price">${it.price}</div>
+          </div>`;
       });
-      menuContent.appendChild(sec);
+      if (section.category === "Huvudrätter") {
+        menuLeft.appendChild(sec);      // Huvudrätter now goes to the left column
+      } else {
+        menuHuvudratter.appendChild(sec); // All other categories go to the right column
+      }
     });
 
     // hours
     const hoursContent = document.getElementById('hours-content');
     hoursContent.innerHTML = '';
-    (data.hours||[]).forEach(h=>{
-      hoursContent.innerHTML += `<div>${h.day}: ${h.open} – ${h.close}</div>`;
+    (data.hours||[]).forEach(h => {
+      if (h.open && h.close) {
+        hoursContent.innerHTML += `<div>${h.day}: ${h.open} – ${h.close}</div>`;
+      } else if (h.open && h.open.toLowerCase() === "stängt") {
+        hoursContent.innerHTML += `<div>${h.day}: Stängt</div>`;
+      } else {
+        hoursContent.innerHTML += `<div>${h.day}: </div>`;
+      }
     });
+
+    // om oss
+    const omContent = document.getElementById('om-content');
+    omContent.innerHTML = '';
+    if (Array.isArray(data.om)) {
+      data.om.forEach(paragraph => {
+        omContent.innerHTML += `<p style="margin-bottom:18px;">${paragraph}</p>`;
+      });
+    } else {
+      omContent.innerHTML = "Ingen information tillgänglig.";
+    }
   } catch(err) {
     console.error(err);
   }
 }
 loadSite();
-
-// Simple image slider logic
-const images = ["bild1.jpg", "bild2.jpg"];
-let currentImg = 0;
-const sliderImg = document.getElementById("slider-img");
-const nextImgBtn = document.getElementById("next-img");
-const prevImgBtn = document.getElementById("prev-img");
-
-function updateSlider() {
-  sliderImg.src = images[currentImg];
-  sliderImg.alt = "Bild " + (currentImg + 1);
-  prevImgBtn.style.display = currentImg > 0 ? "inline-block" : "none";
-  nextImgBtn.style.display = currentImg < images.length - 1 ? "inline-block" : "none";
-}
-
-nextImgBtn.addEventListener("click", () => {
-  if (currentImg < images.length - 1) {
-    currentImg++;
-    updateSlider();
-  }
-});
-
-prevImgBtn.addEventListener("click", () => {
-  if (currentImg > 0) {
-    currentImg--;
-    updateSlider();
-  }
-});
-
-updateSlider();
-
-// Modal logic for enlarged image
-const imgModal = document.getElementById("img-modal");
-const modalImg = document.getElementById("modal-img");
-const closeModal = document.getElementById("close-modal");
-
-sliderImg.addEventListener("click", () => {
-  modalImg.src = images[currentImg];
-  modalImg.alt = sliderImg.alt;
-  imgModal.style.display = "flex";
-  document.body.style.overflow = "hidden";
-});
-
-closeModal.addEventListener("click", () => {
-  imgModal.style.display = "none";
-  document.body.style.overflow = "";
-});
-
-// Optional: close modal on background click
-imgModal.addEventListener("click", (e) => {
-  if (e.target === imgModal) {
-    imgModal.style.display = "none";
-    document.body.style.overflow = "";
-  }
-});
-
-/* Parallax scroll handler */
-window.addEventListener('scroll', function() {
-  const banner = document.querySelector('.parallax-banner');
-  if (banner) {
-    const scrolled = window.scrollY;
-    banner.style.backgroundPosition = `center ${scrolled * 0.15}px`;
-  }
-});
 </script>
 
 </body>
