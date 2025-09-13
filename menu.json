@@ -14,14 +14,14 @@
   ],
 
   "om":[
-    "Upplev smaker från hjärtat av Centralasien hos oss. Vi serverar autentiska rätter som laghman – handgjorda nudlar med saftig köttfyllning och färska grönsaker – och många andra traditionella rätter från det rika uyguriska köket. Allt kött är halal, och de flesta rätter går att få helt vegetariska utan att kompromissa med smaken. Kom och upptäck en ny värld av aromer och kultur på din tallrik!"
+    "Upplev smaker från hjärtat av Centralasien hos oss. Vi serverar autentiska rätter som laghman – handgjorda nudlar med saftigt kött och färska grönsaker – och många andra traditionella rätter från det rika uyguriska köket. Allt kött är halal, och de flesta rätter går att få helt vegetariska utan att kompromissa med smaken. Kom och upptäck en ny värld av aromer och kultur på din tallrik!"
   ],
   "menu": [
     {
       "category": "Förrätter",
       "items": [
         {"name":"Samosa","desc":"Kryddig köttfylld deg","price":"55 kr"},
-        {"name":"Manti","desc":"Uiguriska dumplings med kött","price":"65 kr"}
+        {"name":"Manti","desc":"Uyguriska dumplings med kött","price":"65 kr"}
       ]
     },
     {
@@ -63,14 +63,14 @@
           "price": "149 kr"
         },
         {
-          "name": "Chöchüre",
-          "desc": "Uyghurisk wontonsoppa med lamm",
-          "price": "129 kr"
-        },
-        {
           "name": "Qorma Chöp Stark",
           "desc": "Uyghuriska wokade nudlar (biff/lamm/kyckling/veg)",
           "price": "149 kr"
+        },
+        {
+          "name": "Chöchüre",
+          "desc": "Uyghurisk wontonsoppa med lamm",
+          "price": "129 kr"
         },
         {
           "name": "Naan Kebab",

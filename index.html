@@ -43,9 +43,13 @@
       z-index: -1;
     }
     .hero .logo {
+      
       max-width: 480px; /* Reduced from 700px */
       margin-bottom: 32px;
       filter: drop-shadow(0 0 24px var(--gold));
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 1.2s cubic-bezier(.77,0,.18,1), transform 1.2s cubic-bezier(.77,0,.18,1);
     }
     .hero .welcome-text {
       font-size: 1.6rem;
@@ -141,15 +145,16 @@
     #hours-content, #contact > p { display:inline-block; text-align:center; }
 
     /* Parallax banner */
+    /*
     .parallax-banner {
       width: 100%;
       height: 320px;
       background-image: url('parrallax.jpg');
       background-attachment: fixed;
-      background-position: center 0;
+      background-position: center center; /* Center image vertically and horizontally */
       background-repeat: no-repeat;
       background-size: cover;
-      filter: blur(3px);
+      filter: blur(1.5px); /* Less blur so image is visible */
       margin: 0 auto 0 auto;
       position: relative;
       will-change: background-position;
@@ -181,6 +186,110 @@
         background-attachment: scroll;
       }
     }
+    */
+    @media (max-width: 600px) {
+      .hero {
+        height: 70vh;
+        padding: 0 6px;
+      }
+      .hero video {
+        object-fit: cover;
+        min-height: 100%;
+        min-width: 100%;
+      }
+      .hero .logo {
+        max-width: 220px; /* Smaller logo for mobile */
+        margin-bottom: 18px;
+      }
+      .hero .welcome-text {
+        font-size: 1.1rem;
+        margin-bottom: 18px;
+      }
+      .hero .buttons {
+        gap: 10px;
+      }
+    }
+
+    /* Fade-in for logo */
+    .hero .logo {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 1.2s cubic-bezier(.77,0,.18,1), transform 1.2s cubic-bezier(.77,0,.18,1);
+    }
+
+    /* Animate sections from bottom up */
+    .animate-up {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.9s cubic-bezier(.77,0,.18,1), transform 0.9s cubic-bezier(.77,0,.18,1);
+    }
+
+    .animate-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Animate welcome text and buttons from bottom up */
+    .hero .welcome-text,
+    .hero .buttons {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1s cubic-bezier(.77,0,.18,1), transform 1s cubic-bezier(.77,0,.18,1);
+    }
+    .hero .welcome-text.visible,
+    .hero .buttons.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Food gallery styles */
+    #food-gallery {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 32px 0;
+    }
+    .food-pic {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #000a;
+      cursor: pointer;
+      background: #222;
+      transition: box-shadow 0.2s;
+    }
+    .food-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s cubic-bezier(.77,0,.18,1);
+      border-radius: 16px;
+    }
+    .food-pic:hover img {
+      transform: scale(1.13);
+    }
+    .food-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.85);
+      color: var(--gold);
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.1rem;
+      padding: 18px 10px 10px 10px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      border-radius: 0 0 16px 16px;
+    }
+    .food-pic.active .food-info {
+      opacity: 1;
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body>
@@ -196,8 +305,7 @@
   <img src="kroran_cleaned_scaled2x_v2.png" alt="Restaurang Logo" class="logo">
 
   <div class="welcome-text">
-    Välkommen till Sveriges första Uyghuriska Restaurang<br>
-    för att testa autentisk Uygurisk mat
+    Välkommen till Sveriges första Uyghuriska Restaurang
   </div>
 
   <div class="buttons">
@@ -209,7 +317,9 @@
 
 <!-- Om oss -->
 <section id="om-oss" style="text-align:center;">
-  <h2>Om oss</h2>
+  <h2 style="font-family: 'Cinzel Decorative', serif; color: var(--gold); font-size:2rem; margin-top:0;">
+    Om oss
+  </h2>
   <div id="om-content" style="display:inline-block; text-align:left; max-width:700px;">
     Laddar information…
   </div>
@@ -224,11 +334,22 @@
   </div>
 </section>
 
-<!-- Parallax Banner -->
-<div class="parallax-banner">
-  <h2></h2>
-</div>
-
+<!-- This is to add picture gallary of food items. Uncomment and add images named food1.jpg, food2.jpg, food3.jpg in the same directory as index.html
+<div id="food-gallery" style="width:100%;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding:32px 0;">
+  <div class="food-pic" data-name="Shah Laghman" data-price="179 kr">
+    <img src="food1.jpg" alt="Shah Laghman">
+    <div class="food-info"></div>
+  </div>
+  <div class="food-pic" data-name="Uyghur Göshnaan" data-price="149 kr">
+    <img src="food2.jpg" alt="Uyghur Göshnaan">
+    <div class="food-info"></div>
+  </div>
+  <div class="food-pic" data-name="Samosa" data-price="55 kr">
+    <img src="food3.jpg" alt="Samosa">
+    <div class="food-info"></div>
+  </div>
+</div> 
+//-->
 <!-- Hours -->
 <section id="hours">
   <h2>Öppettider</h2>
@@ -242,8 +363,20 @@
   <p>Adress: <span id="address">Gatan 1, Stad</span></p>
 </section>
 
+<div style="width:100%;background:#000;padding:0;margin:0;">
+  <iframe
+    src="https://www.google.com/maps?q=Furusundsgatan+9,+115+37+Stockholm&output=embed"
+    width="100%"
+    height="320"
+    style="border:0;display:block;margin:0 auto;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
 <footer>
-  © <span id="year"></span> Restaurang Namn
+  © <span id="year"></span> Krorän. Alla rättigheter förbehållna. Bilder och videor av Fun Lab Productions
 </footer>
 
 <script>
@@ -256,7 +389,7 @@ async function loadSite() {
     if(!res.ok) throw new Error('menu.json missing');
     const data = await res.json();
 
-    document.title = data.name || "Restaurang Namn";
+    document.title = data.name || "Krorän";
 
     // phone + address
     document.getElementById('phone').textContent = data.phone || "";
@@ -318,6 +451,66 @@ async function loadSite() {
   }
 }
 loadSite();
+
+// Fade in logo when page loads
+window.addEventListener('DOMContentLoaded', function() {
+  const logo = document.querySelector('.hero .logo');
+  if (logo) {
+    setTimeout(() => {
+      logo.style.opacity = '1';
+      logo.style.transform = 'scale(1)';
+    }, 300);
+  }
+  // Animate welcome text and buttons
+  const welcome = document.querySelector('.hero .welcome-text');
+  const buttons = document.querySelector('.hero .buttons');
+  if (welcome) {
+    setTimeout(() => {
+      welcome.classList.add('visible');
+    }, 500);
+  }
+  if (buttons) {
+    setTimeout(() => {
+      buttons.classList.add('visible');
+    }, 700);
+  }
+});
+
+// Add .animate-up to sections
+['om-oss', 'menu', 'hours', 'contact'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.classList.add('animate-up');
+});
+
+// Animate sections when they enter viewport
+function animateSectionsOnScroll() {
+  document.querySelectorAll('.animate-up').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) {
+      el.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', animateSectionsOnScroll);
+window.addEventListener('DOMContentLoaded', animateSectionsOnScroll);
+
+// Add after your other scripts
+document.querySelectorAll('.food-pic').forEach(pic => {
+  pic.addEventListener('click', function() {
+    // Hide all other infos
+    document.querySelectorAll('.food-pic').forEach(p => {
+      if (p !== pic) p.classList.remove('active');
+    });
+    // Toggle this one
+    pic.classList.toggle('active');
+    const info = pic.querySelector('.food-info');
+    if (pic.classList.contains('active')) {
+      info.innerHTML = `<strong>${pic.dataset.name}</strong><br>${pic.dataset.price}`;
+    } else {
+      info.innerHTML = '';
+    }
+  });
+});
 </script>
 
 </body>
